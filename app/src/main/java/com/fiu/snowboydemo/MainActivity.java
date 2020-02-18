@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ai.kitt.snowboy.AppResCopy;
+import ai.kitt.snowboy.Constants;
 import ai.kitt.snowboy.MsgEnum;
 import ai.kitt.snowboy.audio.AudioDataSaver;
 import ai.kitt.snowboy.audio.RecordingThread;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         detectOutput = findViewById(R.id.detectOutput);
         startButton = findViewById(R.id.startButton);
+
+        // Sets storage directory globals
+        Constants.setWorkspace(this);
 
         // Check permissions, will silently fail if not granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     public void onDestroy() {
         recordingThread.stopRecording();
