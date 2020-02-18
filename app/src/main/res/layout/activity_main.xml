@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/detectInfo"
+        android:layout_width="237dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
+        android:text="Number of times Alexa detected: "
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="241dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginBottom="68dp"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/detectOutput"
+        android:layout_width="151dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="176dp"
+        android:text=""
+        android:textSize="48sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detectInfo" />
+    <!--android:onClick=""-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
