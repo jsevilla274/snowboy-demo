@@ -39,9 +39,9 @@ public class AppResCopy {
                 if (outFile.exists()) {
                     if (override) {
                         outFile.delete();
-                        Log.e(TAG, "overriding file "+ sdcardDstDir +"\n");
+                        Log.d(TAG, "overriding file "+ sdcardDstDir +"\n");
                     } else {
-                        Log.e(TAG, "file "+ sdcardDstDir +" already exists. No override.\n");
+                        Log.d(TAG, "file "+ sdcardDstDir +" already exists. No override.\n");
                         return;
                     }
                 }

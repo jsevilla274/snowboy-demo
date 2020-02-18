@@ -6,11 +6,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int activeTimes = 0;
     private final int DEMO_PERMISSION_CODE = 111;
+    private boolean recording = false;
     private RecordingThread recordingThread;
     private TextView detectOutput;
     private Button startButton;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         detectOutput = findViewById(R.id.detectOutput);
         startButton = findViewById(R.id.startButton);
 
-        // Check permissions, else will silently fail
+        // Check permissions, will silently fail if not granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     DEMO_PERMISSION_CODE);
         } else {
-            initRecording();
+            initSnowboy();
         }
     }
 
@@ -55,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == DEMO_PERMISSION_CODE) {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initRecording();
+                initSnowboy();
             } //else permission denied
         }
     }
 
-    private void initRecording() {
+    private void initSnowboy() {
         AppResCopy.copyResFromAssetsToSD(this);
         recordingThread = new RecordingThread(handle, new AudioDataSaver());
         startButton.setOnClickListener(startButtonHandler);
@@ -68,19 +69,19 @@ public class MainActivity extends AppCompatActivity {
 
     private View.OnClickListener startButtonHandler = new View.OnClickListener() {
         public void onClick(View arg0) {
-            recordingThread.startRecording();
-//            if(record_button.getText().equals(getResources().getString(R.string.btn1_start))) {
-//                stopPlayback();
-//                sleep();
-//                startRecording();
-//            } else {
-//                stopRecording();
-//                sleep();
-//            }
+            if (recording) {
+                recordingThread.stopRecording();
+                startButton.setText("Start");
+                recording = false;
+            } else {
+                recordingThread.startRecording();
+                startButton.setText("Stop");
+                recording = true;
+            }
         }
     };
 
-    @SuppressLint("HandlerLeak")
+
     public Handler handle = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -89,31 +90,27 @@ public class MainActivity extends AppCompatActivity {
                 case MSG_ACTIVE:
                     activeTimes++;
                     detectOutput.setText(activeTimes + "");
-//                    updateLog(" ----> Detected " + activeTimes + " times", "green");
-//                    // Toast.makeText(Demo.this, "Active "+activeTimes, Toast.LENGTH_SHORT).show();
-//                    showToast("Active "+activeTimes);
-                    break;
-                case MSG_INFO:
-//                    updateLog(" ----> "+message);
-                    break;
-                case MSG_VAD_SPEECH:
-//                    updateLog(" ----> normal voice", "blue");
-                    break;
-                case MSG_VAD_NOSPEECH:
-//                    updateLog(" ----> no speech", "blue");
                     break;
                 case MSG_ERROR:
-//                    updateLog(" ----> " + msg.toString(), "red");
+                    Log.e("handleMessage", "handleMessage: " + msg.toString());
                     break;
                 default:
                     super.handleMessage(msg);
                     break;
+//                case MSG_INFO:
+//                    updateLog(" ----> "+message);
+//                    break;
+//                case MSG_VAD_SPEECH:
+//                    updateLog(" ----> normal voice", "blue");
+//                    break;
+//                case MSG_VAD_NOSPEECH:
+//                    updateLog(" ----> no speech", "blue");
+//                    break;
             }
         }
     };
     @Override
     public void onDestroy() {
-//        restoreVolume();
         recordingThread.stopRecording();
         super.onDestroy();
     }

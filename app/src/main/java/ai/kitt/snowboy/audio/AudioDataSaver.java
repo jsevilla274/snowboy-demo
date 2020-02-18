@@ -33,7 +33,7 @@ public class AudioDataSaver implements AudioDataReceivedListener {
 
     public AudioDataSaver() {
         saveFile = new File(Constants.SAVE_AUDIO);
-        Log.e(TAG, Constants.SAVE_AUDIO);
+        Log.d(TAG, Constants.SAVE_AUDIO);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AudioDataSaver implements AudioDataReceivedListener {
             } catch (IOException e) {
                 Log.e(TAG, "IO Exception on finishing saving audio file " + saveFile.toString(), e);
             }
-            Log.e(TAG, "Recording saved to " + saveFile.toString());
+            Log.d(TAG, "Recording saved to " + saveFile.toString());
         }
     }
 }

@@ -8,37 +8,43 @@
 
     <TextView
         android:id="@+id/detectInfo"
-        android:layout_width="237dp"
+        android:layout_width="match_parent"
         android:layout_height="177dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="Number of times Alexa detected: "
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="241dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="68dp"
-        android:text="Start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/detectOutput"
-        android:layout_width="151dp"
+        android:layout_width="match_parent"
         android:layout_height="153dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="176dp"
-        android:text=""
-        android:textSize="48sp"
+
         android:gravity="center"
+        android:text=""
+        android:textSize="64sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/detectInfo" />
-    <!--android:onClick=""-->
+        app:layout_constraintTop_toBottomOf="@+id/detectInfo" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="256dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:text="Start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <!--android:onClick=""-->
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
