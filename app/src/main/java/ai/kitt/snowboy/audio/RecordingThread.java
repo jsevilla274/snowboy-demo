@@ -28,7 +28,7 @@ public class RecordingThread {
     private Handler handler = null;
     private Thread thread;
     
-    private static String strEnvWorkSpace = Constants.DEFAULT_WORK_SPACE;
+    private String strEnvWorkSpace = Constants.DEFAULT_WORK_SPACE;
     private String activeModel = strEnvWorkSpace+ACTIVE_UMDL;    
     private String commonRes = strEnvWorkSpace+ACTIVE_RES;   
     

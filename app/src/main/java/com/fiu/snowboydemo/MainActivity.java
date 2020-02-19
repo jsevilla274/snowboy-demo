@@ -41,15 +41,13 @@ public class MainActivity extends AppCompatActivity {
         Constants.setWorkspace(this);
 
         // Check permissions, will silently fail if not granted
+        // Note: Because app uses getExternalFilesDir, WRITE_EXTERNAL_STORAGE permission not necessary
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED ||
-            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Grant permission(s) dialog
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    DEMO_PERMISSION_CODE);
+                    new String[]{Manifest.permission.RECORD_AUDIO}, DEMO_PERMISSION_CODE);
         } else {
             initSnowboy();
         }

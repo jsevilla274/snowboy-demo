@@ -33,7 +33,7 @@ public class AudioDataSaver implements AudioDataReceivedListener {
 
     public AudioDataSaver() {
         saveFile = new File(Constants.SAVE_AUDIO);
-        Log.d(TAG, Constants.SAVE_AUDIO);
+        Log.d(TAG, "New recording file " + Constants.SAVE_AUDIO);
     }
 
     @Override
