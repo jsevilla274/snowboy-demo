@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
-import ai.kitt.snowboy.Constants;
+import ai.kitt.snowboy.Globals;
 
 public class AudioDataSaver implements AudioDataReceivedListener {
 
@@ -32,8 +32,8 @@ public class AudioDataSaver implements AudioDataReceivedListener {
     private DataOutputStream dataOutputStreamInstance = null;
 
     public AudioDataSaver() {
-        saveFile = new File(Constants.SAVE_AUDIO);
-        Log.d(TAG, "New recording file " + Constants.SAVE_AUDIO);
+        saveFile = new File(Globals.SAVE_AUDIO);
+        Log.d(TAG, "New recording file " + Globals.SAVE_AUDIO);
     }
 
     @Override

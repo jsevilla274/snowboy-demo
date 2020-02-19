@@ -1,11 +1,18 @@
+/*
+ * Class that holds important global variables for the Snowboy library
+ *
+ * Previously called "Constants"
+ */
 package ai.kitt.snowboy;
 
 import android.content.Context;
 
-public class Constants {
+public class Globals {
     public static final String ASSETS_RES_DIR = "snowboy";
-    public static final String ACTIVE_UMDL = "alexa.umdl";
     public static final String ACTIVE_RES = "common.res";
+    public static final String ACTIVE_UMDL = "snowboy.umdl";
+    public static final String ACTIVE_SENSITIVITY = "0.5";
+    public static final boolean ACTIVE_APPLYFRONTEND = false;
     public static final int SAMPLE_RATE = 16000;
     public static String DEFAULT_WORK_SPACE;
     public static String SAVE_AUDIO;

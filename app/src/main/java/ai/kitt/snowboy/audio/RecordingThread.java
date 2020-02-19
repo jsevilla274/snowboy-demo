@@ -1,10 +1,9 @@
 package ai.kitt.snowboy.audio;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import ai.kitt.snowboy.Constants;
+import ai.kitt.snowboy.Globals;
 import ai.kitt.snowboy.MsgEnum;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -20,15 +19,15 @@ public class RecordingThread {
 
     private static final String TAG = RecordingThread.class.getSimpleName();
 
-    private static final String ACTIVE_RES = Constants.ACTIVE_RES;
-    private static final String ACTIVE_UMDL = Constants.ACTIVE_UMDL;
+    private static final String ACTIVE_RES = Globals.ACTIVE_RES;
+    private static final String ACTIVE_UMDL = Globals.ACTIVE_UMDL;
     
     private boolean shouldContinue;
     private AudioDataReceivedListener listener = null;
     private Handler handler = null;
     private Thread thread;
     
-    private String strEnvWorkSpace = Constants.DEFAULT_WORK_SPACE;
+    private String strEnvWorkSpace = Globals.DEFAULT_WORK_SPACE;
     private String activeModel = strEnvWorkSpace+ACTIVE_UMDL;    
     private String commonRes = strEnvWorkSpace+ACTIVE_RES;   
     
@@ -38,9 +37,9 @@ public class RecordingThread {
         this.handler = handler;
         this.listener = listener;
 
-        detector.SetSensitivity("0.6");
+        detector.SetSensitivity(Globals.ACTIVE_SENSITIVITY);
         detector.SetAudioGain(1);
-        detector.ApplyFrontend(true);
+        detector.ApplyFrontend(Globals.ACTIVE_APPLYFRONTEND);
     }
 
     private void sendMessage(MsgEnum what, Object obj){
@@ -77,15 +76,15 @@ public class RecordingThread {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_AUDIO);
 
         // Buffer size in bytes: for 0.1 second of audio
-        int bufferSize = (int)(Constants.SAMPLE_RATE * 0.1 * 2);
+        int bufferSize = (int)(Globals.SAMPLE_RATE * 0.1 * 2);
         if (bufferSize == AudioRecord.ERROR || bufferSize == AudioRecord.ERROR_BAD_VALUE) {
-            bufferSize = Constants.SAMPLE_RATE * 2;
+            bufferSize = Globals.SAMPLE_RATE * 2;
         }
 
         byte[] audioBuffer = new byte[bufferSize];
         AudioRecord record = new AudioRecord(
             MediaRecorder.AudioSource.DEFAULT,
-            Constants.SAMPLE_RATE,
+            Globals.SAMPLE_RATE,
             AudioFormat.CHANNEL_IN_MONO,
             AudioFormat.ENCODING_PCM_16BIT,
             bufferSize);

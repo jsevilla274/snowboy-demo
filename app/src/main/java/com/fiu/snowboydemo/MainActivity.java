@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ai.kitt.snowboy.AppResCopy;
-import ai.kitt.snowboy.Constants;
+import ai.kitt.snowboy.Globals;
 import ai.kitt.snowboy.MsgEnum;
 import ai.kitt.snowboy.audio.AudioDataSaver;
 import ai.kitt.snowboy.audio.RecordingThread;
@@ -37,8 +37,14 @@ public class MainActivity extends AppCompatActivity {
         detectOutput = findViewById(R.id.detectOutput);
         startButton = findViewById(R.id.startButton);
 
+        // Display hotword in prompt
+        TextView detectInfo = findViewById(R.id.detectInfo);
+        String hotword = Globals.ACTIVE_UMDL.substring(0, Globals.ACTIVE_UMDL.indexOf("."));
+        hotword = hotword.substring(0,1).toUpperCase() + hotword.substring(1);
+        detectInfo.setText("Number of times \"" + hotword + "\" detected:");
+
         // Sets storage directory globals
-        Constants.setWorkspace(this);
+        Globals.setWorkspace(this);
 
         // Check permissions, will silently fail if not granted
         // Note: Because app uses getExternalFilesDir, WRITE_EXTERNAL_STORAGE permission not necessary

@@ -12,7 +12,7 @@
         android:layout_height="177dp"
         android:layout_marginTop="100dp"
         android:gravity="center"
-        android:text="Number of times Alexa detected: "
+        android:text="Number of times detected: "
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

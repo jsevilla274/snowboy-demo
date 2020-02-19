@@ -16,7 +16,7 @@ import java.io.InputStream;
 public class AppResCopy {
     private final static String TAG = AppResCopy.class.getSimpleName();
     private final static boolean OVERWRITE_FILE = false;
-    private static String envWorkSpace = Constants.DEFAULT_WORK_SPACE;
+    private static String envWorkSpace = Globals.DEFAULT_WORK_SPACE;
 
     private static void copyFilesFromAssets(Context context, String assetsSrcDir, String externalDstDir, boolean overwrite) {
         try {
@@ -67,6 +67,6 @@ public class AppResCopy {
     }
 
     public static void copyResFromAssetsToSD(Context context) {
-        copyFilesFromAssets(context, Constants.ASSETS_RES_DIR, envWorkSpace, OVERWRITE_FILE);
+        copyFilesFromAssets(context, Globals.ASSETS_RES_DIR, envWorkSpace, OVERWRITE_FILE);
     }
 }
