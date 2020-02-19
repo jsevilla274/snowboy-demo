@@ -1,0 +1,3 @@
+Simple Android demo application using the [Snowboy Hotword Detection](https://github.com/Kitt-AI/snowboy) library. Pressing "Start" will begin recording your voice and wait for the keyword "Alexa" to be said. If detected, the number in the center of the screen will increment.
+
+Tested on Windows, but should work on all platforms of Android Studio as long as you do not change the structure of the project, particularly those containing the .so shared libraries.
